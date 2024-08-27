@@ -9,7 +9,7 @@ pub use constants::*;
 pub use instructions::*;
 pub use state::*;
 
-declare_id!("4Gr4rpnqGQfgvf4wcGN66kWR5PNpo8LyWfeK7CoAJPoF");
+declare_id!("chamgoBwbPefUJmR7bDoe4EyjNSBVk3cEsTffqk7PYt");
 
 #[program]
 pub mod chameleon {
