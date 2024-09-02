@@ -1,7 +1,7 @@
 [package]
 name = "chameleon"
 version = "0.1.0"
-description = "Created with Anchor"
+description = "For anchor solana production"
 edition = "2021"
 
 [lib]
@@ -17,10 +17,15 @@ no-log-ix-name = []
 idl-build = ["anchor-lang/idl-build", "anchor-spl/idl-build"]
 
 [dependencies]
-anchor-lang = { version = "0.30.1", features = ["init-if-needed"] }
+# Anchor
+anchor-client = { version = "0.30.1" }
+anchor-lang = { version = "0.30.1" }
 anchor-spl = { version = "0.30.1", features = ["default", "metadata"] }
-# for cNFT
+# Metaplex
+mpl-token-metadata = { version = "4.1.2", features = ["test-sbf"] }
 mpl-bubblegum = "1.4.0"
+# Solana
 spl-account-compression = { version = "0.3.1", features = ["cpi"] }
 spl-noop = { version = "0.2.0", features = ["cpi"] }
 spl-concurrent-merkle-tree = { version = "0.3.0" }
+solana-security-txt = "1.1.1"

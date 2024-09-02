@@ -6,6 +6,13 @@
     "module": "commonjs",
     "target": "es6",
     "esModuleInterop": true,
-    "resolveJsonModule": true
+    "resolveJsonModule": true,
+    "declaration": true,
+    "allowJs": true,
+    "isolatedModules": true
+    // "paths": {
+    // "*": ["./node_modules/*"]
+    // }
   }
+  // "exclude": ["tests", "nodule_modules"]
 }
