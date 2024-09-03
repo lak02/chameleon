@@ -719,7 +719,8 @@ export type Chameleon = {
         },
         {
           "name": "mint",
-          "writable": true
+          "writable": true,
+          "signer": true
         },
         {
           "name": "tokenProgram2022",

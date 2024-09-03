@@ -22,5 +22,6 @@ anchor verify <program-id>
 
 #### Depencies
 ```shell
-yarn add @solana/spl-token @solana/web3.js @solana/spl-memo @metaplex-foundation/mpl-token-metadata @metaplex-foundation/umi-bundle-defaults @metaplex-foundation/umi-signer-wallet-adapters @openzeppelin/merkle-tree  @types/bs58 keccak256 merkletreejs @metaplex-foundation/solita @solana-developers/helpers @solana/spl-account-compression @metaplex-foundation/mpl-bubblegum
+yarn add @solana/spl-token @solana/web3.js @solana/spl-memo @metaplex-foundation/mpl-token-metadata @metaplex-foundation/umi-bundle-defaults @metaplex-foundation/umi-signer-wallet-adapters @openzeppelin/merkle-tree  @types/bs58 keccak256 merkletreejs @metaplex-foundation/solita @solana-developers/helpers @solana/spl-account-compression @metaplex-foundation/mpl-bubblegum @metaplex-foundation/umi @metaplex-foundation/digital-asset-standard-api
+
 ```

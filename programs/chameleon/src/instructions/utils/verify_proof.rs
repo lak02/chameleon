@@ -1,5 +1,7 @@
+
 use anchor_lang::solana_program::keccak::hashv;
 
+#[allow(dead_code)]
 pub fn verify(proof: &[[u8; 32]], root: &[u8; 32], leaf: &[u8; 32]) -> bool {
     let mut computed_hash = *leaf;
     for proof_element in proof.iter() {

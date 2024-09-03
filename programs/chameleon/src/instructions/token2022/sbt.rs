@@ -52,7 +52,7 @@ pub struct SBT<'info> {
     pub payer: Signer<'info>,
     /// CHECK:
     #[account(mut)]
-    pub mint: UncheckedAccount<'info>,
+    pub mint: Signer<'info>,
     /// CHECK:
     pub token_program_2022: Program<'info, Token2022>,
     pub system_program: Program<'info, System>,

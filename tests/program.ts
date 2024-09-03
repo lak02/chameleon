@@ -10,15 +10,15 @@ export function initEnv(): [anchor.Program<Chameleon>, anchor.AnchorProvider, an
 	const provider = anchor.AnchorProvider.env();
 	anchor.setProvider(provider);
 	const program = anchor.workspace.Chameleon as anchor.Program<Chameleon>;
-	const authority = provider.wallet as anchor.Wallet;
+	const wallet = provider.wallet as anchor.Wallet;
 
 	// metaplex
 	const umi = createUmi(provider.connection.rpcEndpoint)
 	umi.use(mplTokenMetadata())
 
-	const keypair = umi.eddsa.createKeypairFromSecretKey(authority.payer.secretKey)
+	const keypair = umi.eddsa.createKeypairFromSecretKey(wallet.payer.secretKey)
 	const signer = createSignerFromKeypair(umi, keypair);
 	umi.use(signerIdentity(signer))
 
-	return [program, provider, authority]
+	return [program, provider, wallet]
 }

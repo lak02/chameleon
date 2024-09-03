@@ -15,7 +15,7 @@ import { initEnv } from "./program";
 
 
 describe("cNFT", () => {
-	const [program, provider, authority] = initEnv();
+	const [program, provider, wallet] = initEnv();
 	const BUBBLEGUM_PROGRAM_ID = new web3.PublicKey(MPL_BUBBLEGUM_PROGRAM_ID)
 
 	// Tree calculator :  https://compressed.app/
@@ -42,7 +42,7 @@ describe("cNFT", () => {
 
 		let initializeIx = await program.methods
 			.initializeCnftConfig({
-				administrator: authority.publicKey,
+				administrator: wallet.publicKey,
 				treasury: treasury.publicKey,
 				namePrefix: name_prefix,
 				symbol: symbol,
@@ -54,14 +54,14 @@ describe("cNFT", () => {
 				emptyLeaf: 16384
 			})
 			.accountsPartial({
-				authority: authority.publicKey,
+				authority: wallet.publicKey,
 				treeConfig: treeConfig,
 				cnftConfig: cNFTConfig,
 			})
 			.instruction()
 
 		const txs = new anchor.web3.Transaction().add(initializeIx)
-		await execTx(txs, [authority.payer]);
+		await execTx(txs, [wallet.payer]);
 	});
 
 
@@ -72,11 +72,11 @@ describe("cNFT", () => {
 				provider.connection.commitment,
 			),
 			tree.publicKey,
-			authority.publicKey,
+			wallet.publicKey,
 			{ maxDepth: 14, maxBufferSize: 64 },
 			11,
 		);
-		await execTx(new anchor.web3.Transaction().add(allocTreeIx), [authority.payer, tree]);
+		await execTx(new anchor.web3.Transaction().add(allocTreeIx), [wallet.payer, tree]);
 
 		const addTreeIx = await program.methods
 			.createTreeConfig()
@@ -87,7 +87,7 @@ describe("cNFT", () => {
 			})
 			.instruction();
 		const txs = new anchor.web3.Transaction().add(addTreeIx)
-		await execTx(txs, [authority.payer, tree]);
+		await execTx(txs, [wallet.payer, tree]);
 	});
 
 
@@ -124,7 +124,7 @@ describe("cNFT", () => {
 				masterEditionAccount
 			})
 			.instruction();
-		await execTx(new anchor.web3.Transaction().add(mintCollectionIx), [authority.payer, collectionMint]);
+		await execTx(new anchor.web3.Transaction().add(mintCollectionIx), [wallet.payer, collectionMint]);
 	});
 
 	// `collection_cpi` is a custom prefix required by the Bubblegum program
@@ -144,7 +144,7 @@ describe("cNFT", () => {
 			.instruction();
 
 		const txs = new anchor.web3.Transaction().add(mintTx)
-		await execTx(txs, [authority.payer]);
+		await execTx(txs, [wallet.payer]);
 
 	});
 });
