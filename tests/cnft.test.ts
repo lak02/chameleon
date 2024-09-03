@@ -33,6 +33,10 @@ describe("cNFT", () => {
 	const treasury = web3.Keypair.generate();
 	const salesPrice = new anchor.BN(1 * web3.LAMPORTS_PER_SOL);
 
+	const max_depth = 14;
+	const max_buffer_size = 64;
+	const canopy_depth = 11;
+
 	it("Initialize configuration", async () => {
 		const name_prefix = "Mad Lads"
 		const symbol = "MAD"
@@ -51,7 +55,9 @@ describe("cNFT", () => {
 				salesPrice: salesPrice,
 				wlRoot: [],
 				wlLimit: 0,
-				emptyLeaf: 16384
+				emptyLeaf: 16384,
+				maxDepth: max_depth,
+				maxBufferSize: max_buffer_size
 			})
 			.accountsPartial({
 				authority: wallet.publicKey,
@@ -73,8 +79,8 @@ describe("cNFT", () => {
 			),
 			tree.publicKey,
 			wallet.publicKey,
-			{ maxDepth: 14, maxBufferSize: 64 },
-			11,
+			{ maxDepth: max_depth, maxBufferSize: max_buffer_size },
+			canopy_depth,
 		);
 		await execTx(new anchor.web3.Transaction().add(allocTreeIx), [wallet.payer, tree]);
 
@@ -89,7 +95,6 @@ describe("cNFT", () => {
 		const txs = new anchor.web3.Transaction().add(addTreeIx)
 		await execTx(txs, [wallet.payer, tree]);
 	});
-
 
 	const collectionMint = web3.Keypair.generate();
 	console.log("collectionMint: ", collectionMint.publicKey.toBase58());

@@ -28,6 +28,9 @@ pub struct CnftConfig {
 
     pub tree_config: Pubkey,
     pub empty_leaf: u16, // tree max leaf size
+    // https://github.com/solana-labs/solana-program-library/blob/master/account-compression/sdk/src/constants/index.ts
+    pub max_depth: u32,
+    pub max_buffer_size: u32,
 
     pub bump: u8,
 }
@@ -36,7 +39,6 @@ impl CnftConfig {
     // if custom discriminators
     // https://github.com/coral-xyz/anchor/issues/3005#issuecomment-2299217823
     pub const LEN: usize = ANCHOR_DISCRIMINATOR + CnftConfig::INIT_SPACE;
-    // https://github.com/solana-labs/solana-program-library/blob/master/account-compression/sdk/src/constants/index.ts
-    pub const MAX_DEPTH: u32 = 14;
-    pub const MAX_BUFFER_SIZE: u32 = 64;
+    pub const MAX_DEPTH: u32 = 0;
+    pub const MAX_BUFFER_SIZE: u32 = 0;
 }

@@ -13,8 +13,8 @@ pub fn process(ctx: Context<CreateTreeConfig>) -> Result<()> {
         .log_wrapper(&ctx.accounts.log_wrapper.to_account_info())
         .compression_program(&ctx.accounts.compression_program.to_account_info())
         .system_program(&ctx.accounts.system_program.to_account_info())
-        .max_depth(CnftConfig::MAX_DEPTH)
-        .max_buffer_size(CnftConfig::MAX_BUFFER_SIZE)
+        .max_depth(ctx.accounts.cnft_config.max_depth)
+        .max_buffer_size(ctx.accounts.cnft_config.max_buffer_size)
         .invoke_signed(&[&[CNFT_CONFIG_SEED.as_bytes(), &[ctx.bumps.cnft_config]]])?;
 
     ctx.accounts.cnft_config.tree_config = ctx.accounts.tree_config.key();
